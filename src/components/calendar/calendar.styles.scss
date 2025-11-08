@@ -1,0 +1,103 @@
+@use '@/styles/mixins.scss' as *;
+@use '@/styles/colors.scss' as *;
+
+@mixin gridCell {
+  width: 45px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appCalendar {
+  @include card-s;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 270px;
+
+  > .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    width: 100%;
+
+    > .prevButton,
+    > .nextButton {
+      @include noSelect;
+      @include center;
+      @include transition;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      width: 24px;
+      height: 24px;
+      color: $color-primary;
+
+      &:hover {
+        background-color: $color-primary;
+        color: $color-white;
+      }
+    }
+
+    > .title {
+      @include center;
+      flex: 1;
+    }
+  }
+
+  > .daysOfWeek {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    > .dow {
+      @include gridCell;
+      font-size: 10px;
+    }
+  }
+
+  > .body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+
+    > .row {
+      display: flex;
+      flex-direction: row;
+      gap: 2px;
+      justify-content: space-between;
+      width: 100%;
+
+      > .cell {
+        @include gridCell;
+        @include transition;
+        @include noSelect;
+        @include center;
+
+        padding: 4px;
+        border: 1px solid rgba(0, 0, 0, 0);
+        border-radius: 4px;
+
+        &._hasDate {
+          cursor: pointer;
+          &:hover {
+            border: 1px solid $color-primary;
+          }
+
+          &._selected {
+            background-color: $color-primary;
+            color: $color-white;
+          }
+        }
+      }
+    }
+  }
+}
